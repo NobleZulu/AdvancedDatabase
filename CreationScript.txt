@@ -1,0 +1,58 @@
+CREATE DATABASE IF NOT EXISTS moviesdb;
+USE moviesdb;
+
+CREATE TABLE Country (
+    code VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(100),
+    language VARCHAR(50)
+);
+
+CREATE TABLE Movie (
+    movieId INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    year YEAR,
+    genre VARCHAR(100),
+    summary TEXT,
+    producerId INT,
+    countryCode VARCHAR(10),
+    FOREIGN KEY (countryCode) REFERENCES Country(code)
+);
+
+CREATE TABLE Artist (
+    artistId INT AUTO_INCREMENT PRIMARY KEY,
+    surname VARCHAR(100),
+    name VARCHAR(100),
+    DOB VARCHAR(255)
+);
+
+CREATE TABLE Role (
+    movieId INT,
+    actorId INT,
+    roleName VARCHAR(100),
+    PRIMARY KEY (movieId, actorId),
+    FOREIGN KEY (movieId) REFERENCES Movie(movieId),
+    FOREIGN KEY (actorId) REFERENCES Artist(artistId)
+);
+
+CREATE TABLE Internet_user (
+    email VARCHAR(255) PRIMARY KEY,
+    surname VARCHAR(100),
+    name VARCHAR(100),
+    region VARCHAR(100)
+);
+
+CREATE TABLE Score_movie (
+    email VARCHAR(255),
+    movieId INT,
+    score TINYINT,
+    PRIMARY KEY (email, movieId),
+    FOREIGN KEY (email) REFERENCES Internet_user(email),
+    FOREIGN KEY (movieId) REFERENCES Movie(movieId)
+);
+
+
+
+
+
+
+
